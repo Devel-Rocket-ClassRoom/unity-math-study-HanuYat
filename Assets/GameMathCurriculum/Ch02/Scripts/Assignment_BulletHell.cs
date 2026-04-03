@@ -30,6 +30,7 @@ public class Assignment_BulletHell : MonoBehaviour
     [Header("=== 나선형 패턴 파라미터 ===")]
     [Tooltip("나선형 회전 속도 (라디안/초)")] [Range(0.5f, 5f)]
     [SerializeField] private float spiralTurnSpeed = 2f;
+    [SerializeField] private float offset;
 
     [Header("=== 부채꼴 패턴 파라미터 ===")]
     [Tooltip("부채꼴 각도 범위 (도, 360까지)")] [Range(30f, 360f)]
@@ -47,6 +48,7 @@ public class Assignment_BulletHell : MonoBehaviour
     private void Update()
     {
         fireTimer -= Time.deltaTime;
+        offset = (Time.time * spiralTurnSpeed) % 360f;
 
         if (fireTimer <= 0f)
         {
@@ -87,18 +89,32 @@ public class Assignment_BulletHell : MonoBehaviour
     private Vector3 CalculateCircleDirection(int index, int total)
     {
         // TODO
-        return Vector3.forward;
+        float angleSpacing = 360 / bulletCount;
+
+        float angleDegree = (index * angleSpacing + offset) % 360f;
+        float angleRadian = angleDegree * Mathf.Deg2Rad;
+
+        Vector3 direction = new Vector3(Mathf.Cos(angleRadian), 0f, Mathf.Sin(angleRadian)).normalized;
+
+        return direction;
     }
 
     private Vector3 CalculateSpiralDirection(int index, int total)
     {
         // TODO
-        return Vector3.forward;
+        float angleSpacing = 360 / bulletCount;
+        float angleDegree = (index * angleSpacing + 360f) % 360f;
+        float angleRadian = angleDegree * Mathf.Deg2Rad;
+
+        Vector3 direction = new Vector3(Mathf.Cos(angleRadian), 0f, Mathf.Sin(angleRadian)).normalized;
+
+        return direction;
     }
 
     private Vector3 CalculateFanDirection(int index, int total)
     {
         // TODO
+
         return Vector3.forward;
     }
     
