@@ -37,6 +37,12 @@ public class CoordinateTransformDemo : MonoBehaviour
         if (childObject == null || worldTarget == null) return;
 
         // TODO
+        childLocalPos = childObject.localPosition;
+        childWorldPos = transform.TransformPoint(childLocalPos);
+
+        targetWorldPos = worldTarget.position;
+        targetLocalPos = transform.InverseTransformPoint(targetWorldPos);
+
 
         UpdateUI();
     }

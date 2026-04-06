@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 public class Assignment_PlanetOrbit : MonoBehaviour
 {
 
@@ -50,6 +51,19 @@ public class Assignment_PlanetOrbit : MonoBehaviour
     private void Update()
     {
         // TODO
+        Quaternion planetRotQuat = Quaternion.Euler(0f, planetOrbitSpeed * Time.time, 0f);
+        Vector3 planetOffset = new Vector3(planetOrbitRadius, 1f, 0f);
+        Matrix4x4 planetRotMatrix = Matrix4x4.TRS(orbitCenter, planetRotQuat, Vector3.one);   
+        transform.position = planetRotMatrix.MultiplyPoint3x4(planetOffset);
+
+        Quaternion satRotQuat = Quaternion.Euler(0f, satelliteOrbitSpeed * Time.time, 0f);
+        Vector3 satOffset = new Vector3(satelliteOrbitRadius, 0f, 0f);
+        Matrix4x4 satRotMatrix = Matrix4x4.TRS(transform.position, satRotQuat, Vector3.one);
+        satellite.position = satRotMatrix.MultiplyPoint3x4(satOffset);
+
+        planetWorldPos = transform.position;
+        satelliteLocalPos = satellite.localPosition;
+        satelliteWorldPos = satellite.position;
 
         UpdateUI();
     }

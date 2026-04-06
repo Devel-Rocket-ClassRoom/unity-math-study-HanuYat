@@ -45,6 +45,28 @@ public class Assignment_RotationTrail : MonoBehaviour
     private void Update()
     {
         // TODO
+        if (autoRotate)
+        {
+            lastTipPos = Vector3.zero;
+            Quaternion rotQuat = Quaternion.Euler(0f, rotationSpeed * Time.time, rotationAngle * Time.time);
+            Matrix4x4 rotMatrix = Matrix4x4.TRS(lastTipPos, rotQuat, Vector3.one);
+            Vector3 offset = new Vector3(armLength, 1f, 0f);
+            Vector3 tipPos = rotMatrix.MultiplyPoint3x4(offset);
+            transform.position = tipPos;
+
+            if (trailPositions.Count > trailLength)
+            {
+                for (int i = 0; i < trailPositions.Count - 1; i++)
+                {
+                    trailPositions.RemoveAll(pos => pos == trailPositions[i]);
+                }
+            }
+            trailPositions.Add(tipPos);
+        }
+        else
+        {
+            trailPositions.Clear();
+        }
         
         UpdateUI();
     }

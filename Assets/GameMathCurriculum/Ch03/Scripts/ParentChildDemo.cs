@@ -42,6 +42,20 @@ public class ParentChildDemo : MonoBehaviour
     private void Update()
     {
         // TODO
+        if (autoRotate)
+        {
+            float deltaRotation = rotationSpeed * Time.deltaTime;
+            transform.Rotate(0f, deltaRotation, 0f);
+        }
+
+        unityWorldPos = childObject.position;
+
+        Vector3 childLocalPos = childObject.localPosition;
+
+        Matrix4x4 parentMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
+        manualWorldPos = parentMatrix.MultiplyPoint(childLocalPos);
+
+        positionDifference = Vector3.Distance(unityWorldPos, manualWorldPos);
 
         UpdateUI();
     }
