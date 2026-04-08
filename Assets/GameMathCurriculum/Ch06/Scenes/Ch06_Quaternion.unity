@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5012484371151969115, guid: f73364429a8992a41a952e6d73fe79da, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1368,6 +1368,10 @@ PrefabInstance:
       propertyPath: uiInfoText
       value: 
       objectReference: {fileID: 1172679613}
+    - target: {fileID: 1888822370585850961, guid: 6f16f81efb3c799469513467de23d16e, type: 3}
+      propertyPath: startYAngle
+      value: 111
+      objectReference: {fileID: 0}
     - target: {fileID: 1888822370585850961, guid: 6f16f81efb3c799469513467de23d16e, type: 3}
       propertyPath: waypoints.Array.size
       value: 4

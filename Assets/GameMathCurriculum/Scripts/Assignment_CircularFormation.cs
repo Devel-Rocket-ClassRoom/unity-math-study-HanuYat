@@ -47,10 +47,12 @@ public class Assignment_CircularFormation : MonoBehaviour
             if (units[i] == null) continue;
 
             // TODO
+            float anglePerUnit = 360f / units.Length * i;
+            Quaternion unitRot = Quaternion.AngleAxis(anglePerUnit, leader.up);
+            Vector3 offset = unitRot * (leader.forward * formationRadius);
 
-            // TODO
-
-            // TODO
+            units[i].position = leader.position + offset;
+            units[i].rotation = unitRot * leader.rotation;
         }
 
         UpdateUI();
