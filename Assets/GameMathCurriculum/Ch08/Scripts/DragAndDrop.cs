@@ -1,17 +1,14 @@
 using UnityEngine;
 
-public class Drag : MonoBehaviour
+public class DragAndDrop : MonoBehaviour
 {
-    [SerializeField] private float maxRayDistance = 1000f;
-    [SerializeField] private string groundTag = "Ground";
-    [SerializeField] private string Droptag = "DropZone";
+    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask dropZone;
+    [SerializeField] private LayerMask dragObject;
 
-    [SerializeField] private Terrain terrain;
-    [SerializeField] private GameObject target1;
-    [SerializeField] private GameObject target2;
-    [SerializeField] private GameObject target3;
+    private DragObject draggingObject;
 
-    private bool isHit = false;
+    private bool isDraging = false;
 
     private Camera cam;
 
@@ -22,25 +19,45 @@ public class Drag : MonoBehaviour
 
     private void Update()
     {
-        Vector3 screenPos = Input.mousePosition;
-        screenPos.z = 100f;
-
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        float target1Height = terrain.SampleHeight(target1.transform.position);
-        float target2Height = terrain.SampleHeight(target2.transform.position);
-        float target3Height = terrain.SampleHeight(target3.transform.position);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance))
+        if (Input.GetMouseButtonDown(0))
         {
-            isHit = true;
-            Vector3 hisPos = hit.transform.position;
-
-            if (Input.GetMouseButton(0))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, dragObject))
             {
-                if (hit.collider.CompareTag("Selectable"))
+                Debug.Log("Drag Start");
+                isDraging = true;
+                draggingObject = hit.collider.GetComponent<DragObject>();
+                draggingObject.ResetDrag();
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (isDraging)
+            {
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, dropZone))
                 {
-                    target1.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                    draggingObject.ResetDrag();
+                    draggingObject.transform.position = hit.collider.transform.position;
+                    draggingObject.transform.position += Vector3.up * 7f;
                 }
+                else
+                {
+                    draggingObject.Return();
+                }
+
+                Debug.Log("Drag End");
+                isDraging = false;
+                draggingObject = null;
+            }
+        }
+
+        else if (isDraging)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ground))
+            {
+                Debug.Log(hit.point);
+                draggingObject.transform.position = hit.point;
             }
         }
     }

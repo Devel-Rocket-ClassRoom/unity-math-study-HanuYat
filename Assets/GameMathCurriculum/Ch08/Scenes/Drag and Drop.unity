@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 297765509}
   - component: {fileID: 297765508}
   - component: {fileID: 297765511}
-  - component: {fileID: 297765512}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -257,24 +256,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &297765512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297765507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d0ab4c15d6a85649b3cee6347ad83fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Drag
-  maxRayDistance: 1000
-  selectableTag: Selectable
-  terrain: {fileID: 927114425}
-  target1: {fileID: 1070391119}
-  target2: {fileID: 1615651805}
-  target3: {fileID: 407125958}
 --- !u!1001 &407125957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,16 +328,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Selectable_Cube (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 407125959}
   m_SourcePrefab: {fileID: 100100000, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
 --- !u!1 &407125958 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
   m_PrefabInstance: {fileID: 407125957}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &407125959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407125958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e0189bc5dc8ec40aa8ecd01d5ead4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragObject
+  originalPos: {x: 0, y: 0, z: 0}
+  isReturn: 0
+  returnTime: 2
 --- !u!1 &927114423
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +371,8 @@ GameObject:
   - component: {fileID: 927114426}
   - component: {fileID: 927114425}
   - component: {fileID: 927114424}
-  m_Layer: 0
+  - component: {fileID: 927114427}
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -450,6 +454,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927114427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927114423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0ab4c15d6a85649b3cee6347ad83fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragAndDrop
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  dropZone:
+    serializedVersion: 2
+    m_Bits: 128
+  dragObject:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &1070391118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959902281082606685, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 72.6
+      value: 47.2
       objectReference: {fileID: 0}
     - target: {fileID: 1959902281082606685, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
       propertyPath: m_LocalPosition.z
@@ -522,16 +547,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Selectable_Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1070391120}
   m_SourcePrefab: {fileID: 100100000, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
 --- !u!1 &1070391119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
   m_PrefabInstance: {fileID: 1070391118}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1070391120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070391119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e0189bc5dc8ec40aa8ecd01d5ead4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragObject
+  originalPos: {x: 0, y: 0, z: 0}
+  isReturn: 0
+  returnTime: 2
 --- !u!1001 &1615651804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,11 +605,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959902281082606685, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 310.7
+      value: 310.1
       objectReference: {fileID: 0}
     - target: {fileID: 1959902281082606685, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 61.9
+      value: 52.6
       objectReference: {fileID: 0}
     - target: {fileID: 1959902281082606685, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
       propertyPath: m_LocalPosition.z
@@ -604,16 +651,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Selectable_Cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1615651806}
   m_SourcePrefab: {fileID: 100100000, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
 --- !u!1 &1615651805 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5868095191115444951, guid: b3daf5f339a52c34eab2b97ee9306447, type: 3}
   m_PrefabInstance: {fileID: 1615651804}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1615651806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615651805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e0189bc5dc8ec40aa8ecd01d5ead4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragObject
+  originalPos: {x: 0, y: 0, z: 0}
+  isReturn: 0
+  returnTime: 2
 --- !u!1001 &1624099298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,8 +696,8 @@ PrefabInstance:
       value: Plate (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5887782233617864660, guid: 942ae5e451cb9f044841373b360135df, type: 3}
-      propertyPath: m_TagString
-      value: DropZone
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8320532138801015643, guid: 942ae5e451cb9f044841373b360135df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -815,8 +884,8 @@ PrefabInstance:
       value: Plate
       objectReference: {fileID: 0}
     - target: {fileID: 5887782233617864660, guid: 942ae5e451cb9f044841373b360135df, type: 3}
-      propertyPath: m_TagString
-      value: DropZone
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8320532138801015643, guid: 942ae5e451cb9f044841373b360135df, type: 3}
       propertyPath: m_LocalPosition.x
