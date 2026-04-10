@@ -17,13 +17,6 @@ public class DragObject : MonoBehaviour
         originalPos = transform.position;
     }
 
-    public void ResetDrag()
-    {
-        isReturn = false;
-        timer = 0f;
-        startPos = Vector3.zero;
-    }
-
     private void Update()
     {
         if (isReturn)
@@ -40,6 +33,13 @@ public class DragObject : MonoBehaviour
                 transform.position = originalPos;
             }
         }
+    }
+
+    public void ResetDrag()
+    {
+        isReturn = false;
+        timer = 0f;
+        startPos = Vector3.zero;
     }
 
     public void Return()
