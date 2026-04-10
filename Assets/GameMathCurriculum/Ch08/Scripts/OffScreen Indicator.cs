@@ -18,18 +18,19 @@ public class OffScreenIndicator : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
-        if (screenPos.x < margin || screenPos.y < margin || screenPos.x > Screen.width - margin || screenPos.y > Screen.height - margin)
+        if (screenPos.x < 0 || screenPos.y < 0 || screenPos.x > Screen.width || screenPos.y > Screen.height)
         {
-            if (screenPos.z < 0f)
-            {
-                screenPos *= -1f;
-            }
+            Vector3 local = cam.transform.InverseTransformPoint(transform.position);
+            Vector2 dir = new Vector2(local.x, local.y).normalized;
+            Vector2 center = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
+            float scale = Mathf.Min(center.x / Mathf.Abs(dir.x), center.y / Mathf.Abs(dir.y));
+            Vector2 pos = center + dir * scale;
+            pos.x = Mathf.Clamp(pos.x, margin, Screen.width - margin);
+            pos.y = Mathf.Clamp(pos.y, margin, Screen.height - margin);
+
+            indicatorRenderer.transform.position = pos;
             indicatorRenderer.SetAlpha(1f);
-            Vector3 clampedScreenPos = new Vector3(
-                Mathf.Clamp(screenPos.x, margin, Screen.width - margin),
-                Mathf.Clamp(screenPos.y, margin, Screen.height - margin), 0f);
-            indicatorImage.transform.position = clampedScreenPos;
         }
         else
         {
